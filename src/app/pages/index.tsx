@@ -1,10 +1,11 @@
-"use client";
-import { useUser } from '@clerk/nextjs';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+"use client"
 
-export default function HomePage() {
-  const { isSignedIn,user } = useUser();
+import { useUser } from '@clerk/nextjs'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+
+export default function Home() {
+  const { isSignedIn, user } = useUser()
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-400 to-purple-500 flex flex-col items-center justify-center text-white">
@@ -15,7 +16,7 @@ export default function HomePage() {
           <Link href="/dashboard">
             <Button variant="secondary">Go to Dashboard</Button>
           </Link>
-          <Link href="/create-post">
+          <Link href="/posts/create">
             <Button>Create a Post</Button>
           </Link>
         </div>
@@ -25,5 +26,5 @@ export default function HomePage() {
         </Link>
       )}
     </div>
-  );
+  )
 }
