@@ -1,3 +1,4 @@
+"use client"
 import { useUser } from '@clerk/nextjs';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
@@ -21,7 +22,7 @@ export default function Dashboard() {
   return (
     <div className="container mx-auto mt-8">
       <h1 className="text-3xl font-bold mb-4">Welcome, {user?.username}!</h1>
-      <Link href="/create-post">
+      <Link href="/create">
         <Button>Create New Post</Button>
       </Link>
       <h2 className="text-2xl font-semibold mt-8 mb-4">Your Posts</h2>
