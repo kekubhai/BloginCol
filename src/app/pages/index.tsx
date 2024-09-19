@@ -1,5 +1,4 @@
 "use client"
-
 import { useUser } from '@clerk/nextjs'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -16,7 +15,7 @@ export default function Home() {
           <Link href="/dashboard">
             <Button variant="secondary">Go to Dashboard</Button>
           </Link>
-          <Link href="/posts/create">
+          <Link href="/create">
             <Button>Create a Post</Button>
           </Link>
         </div>
