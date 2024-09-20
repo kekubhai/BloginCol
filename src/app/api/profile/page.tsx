@@ -1,8 +1,9 @@
+"use client"
 import { useState, useEffect } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Select } from '@/components/ui/select';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export default function Profile() {
   const { user } = useUser();
@@ -52,20 +53,32 @@ export default function Profile() {
           onValueChange={setDepartment}
           required
         >
-          <Select.Option value="Computer Science">Computer Science</Select.Option>
-          <Select.Option value="Electrical Engineering">Electrical Engineering</Select.Option>
-          <Select.Option value="Mechanical Engineering">Mechanical Engineering</Select.Option>
+          <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select a Branch" />
+      </SelectTrigger>
+      <SelectContent>
+
+          <SelectItem value="Computer Science">Computer Science</SelectItem>
+          <SelectItem value="Electrical Engineering">Electrical Engineering</SelectItem>
+          <SelectItem value="Mechanical Engineering">Mechanical Engineering</SelectItem>
           {/* Add more departments as needed */}
+      </SelectContent>
         </Select>
         <Select
           value={year}
           onValueChange={setYear}
           required
         >
-          <Select.Option value="1">1st Year</Select.Option>
-          <Select.Option value="2">2nd Year</Select.Option>
-          <Select.Option value="3">3rd Year</Select.Option>
-          <Select.Option value="4">4th Year</Select.Option>
+          <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select a Year" />
+      </SelectTrigger>
+      <SelectContent>
+
+          <SelectItem value="1">1st Year</SelectItem>
+          <SelectItem value="2">2nd Year</SelectItem>
+          <SelectItem value="3">3rd Year</SelectItem>
+          <SelectItem value="4">4th Year</SelectItem>
+      </SelectContent>
         </Select>
         <Button type="submit">Update Profile</Button>
       </form>

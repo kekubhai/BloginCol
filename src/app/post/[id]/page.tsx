@@ -45,11 +45,11 @@ export default function PostDetail() {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`/api/posts/${id}`)
+        const response = await fetch(`/api/post/${id}`)
         if (!response.ok) throw new Error('Failed to fetch post')
         const data = await response.json()
         setPost(data)
-      } catch (err) {
+      } catch (error) {
         setError('An error occurred while fetching the post.')
       } finally {
         setIsLoading(false)

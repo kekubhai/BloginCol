@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useParams } from 'next/navigation'; // Use `next/navigation` for dynamic routes
+import { useParams } from 'next/navigation'; 
 import { useUser } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -175,7 +175,7 @@ export default function PostDetail() {
     }
   };
 
-  if (!post) return <div>Loading...</div>;
+  if (!post) return <div>Loading..., Please go back</div>;
 
   return (
     <div className="container mx-auto mt-8">
