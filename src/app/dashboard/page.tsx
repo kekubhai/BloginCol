@@ -1,14 +1,22 @@
+
 "use client"
 import { useUser } from '@clerk/nextjs';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 
+interface Post {
+  id: string;
+  title: string;
+  content: string;
+  userId: string;
+}
+
 export default function Dashboard() {
   const { user } = useUser();
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -16,20 +24,27 @@ export default function Dashboard() {
         setIsLoading(true);
         const response = await fetch('/api/posts');
         if (!response.ok) {
-          throw new Error('Failed to fetch posts');
+          const errorData = await response.json();
+          throw new Error(`Failed to fetch posts: ${errorData.error || response.statusText}`);
         }
         const data = await response.json();
-        setPosts(data);
+        // Filter posts to only show the current user's posts
+        const userPosts = data.filter((post: Post) => post.userId === user?.id);
+        setPosts(userPosts);
       } catch (err) {
-        setError(err.message);
+        console.error('Error details:', err);
+        setError(err instanceof Error ? err.message : 'An error occurred');
       } finally {
         setIsLoading(false);
       }
     };
-    fetchPosts();
-  }, []);
+    if (user) {
+      fetchPosts();
+    }
+  }, [user]);
 
-  return (
+
+return (
     <div className="container mx-auto mt-8">
       <h1 className="text-3xl font-bold mb-4">Welcome, {user?.username}!</h1>
       <Link href="/create">

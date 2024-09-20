@@ -20,18 +20,17 @@ export default function CreatePost() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
     try {
-      const formData = new FormData();
-      formData.append('title', title);
-      formData.append('content', content);
-      if (image) {
-        formData.append('image', image);
-      }
-
       const response = await fetch('/api/posts', {
         method: 'POST',
-        body: formData,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title,
+          content,
+          userId: user?.id,
+        }),
       });
 
       if (!response.ok) {
@@ -43,7 +42,8 @@ export default function CreatePost() {
         title: "Success",
         description: "Your post has been created successfully!",
       });
-      router.push(`/posts/${newPost.id}`);
+      router.push('/dashboard');
+   
     } catch (error) {
       console.error('Error creating post:', error);
       toast({
